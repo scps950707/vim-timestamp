@@ -2,7 +2,7 @@
 " Author:         scps950707
 " Email:          scps950707@gmail.com
 " Created:        2016-06-29 23:35
-" Last Modified:  2016-06-29 23:37
+" Last Modified:  2016-06-30 01:16
 " Filename:       timestamp.vim
 " =============================================================================
 " auto-update the timestamp right before saving a file
@@ -18,9 +18,9 @@ let s:save_cpo = &cpo
 set cpo&vim
 
 function! timestamp#update()
-    let pattern = '\(.*\(Last\)\?\s*\([Cc]hanged\?\|[Mm]odified\|[Uu]pdated\?\)\s*:\s*\)\([0-9]*-[0-9]*-[0-9]* [0-9]*:[0-9]*\)'
-    let replace = '\1' . strftime("%Y-%m-%d %H:%M")
-    call timestamp#substitute(1, 20, pattern, replace)
+    let pattern = g:timestampTimePattern
+    let replace = '\1' . strftime(g:timestampTimeFormat)
+    call timestamp#substitute(g:timestampStartLineNum, g:timestampEndLineNum, pattern, replace)
 endfunction
 
 function! timestamp#substitute(start, end, pattern, replace)
